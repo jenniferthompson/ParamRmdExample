@@ -1,0 +1,53 @@
+---
+title: "Dashboard for Species `r params$site`"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+params:
+  site: "setosa" # default if no other value is given
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(ggplot2)
+
+## Get dataset to use for all charts
+iris_sub <- subset(iris, Species == params$site)
+
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Petal Length vs Width
+
+```{r}
+ggplot(iris_sub) +
+  aes(x = Sepal.Length, y = Sepal.Width) +
+  geom_point() +
+  geom_smooth()
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Sepal Length
+
+```{r}
+ggplot(data = iris_sub) +
+  aes(x = Sepal.Length) +
+  geom_histogram()
+
+```
+
+### Sepal.Width
+
+```{r}
+ggplot(data = iris_sub) +
+  aes(x = Sepal.Width) +
+  geom_histogram()
+
+```
+

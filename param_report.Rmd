@@ -1,0 +1,16 @@
+---
+title: "Parameter Test"
+author: "Jennifer Thompson"
+date: "1/16/2019"
+output: html_document
+params:
+  ncyl: 6 # default if no parameter value is given
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+knitr::kable(subset(mtcars, cyl == params$ncyl))
+```
